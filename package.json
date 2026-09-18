@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=desarrollo-web-ssr:* node ./bin/www"
+    "start": "DEBUG=desarrollo-web-ssr:* node ./bin/www",
+    "saludo": "echo 'Hola Mundo'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
