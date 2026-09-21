@@ -2,6 +2,7 @@
   "name": "desarrollo-web-ssr",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "DEBUG=desarrollo-web-ssr:* node ./server/bin/www",
     "saludo": "echo 'Hola Mundo'"
