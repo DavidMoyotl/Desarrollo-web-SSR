@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '../app'
+import app from '../app.js'
 // Importantando Debug
 import createDebug from "debug"
 // var debug = require('debug')('desarrollo-web-ssr:server');
