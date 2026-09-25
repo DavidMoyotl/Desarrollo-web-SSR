@@ -12,9 +12,14 @@ import cookieParser from 'cookie-parser'
 // Importa modulos para manejar logs
 // ❌ var logger = require('morgan');
 import logger from 'morgan'
+// Importanto biblioteca de debug
+import createDebug from "debug"
 // IMPORTS para crear Dirname
 import {fileURLToPath} from 'node:url'
 import {dirname} from 'node:path'
+
+// Creacion del objeto Debug
+const debug = createDebug('desarrollo-web-ssr:server')
 // Creando Variables
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -24,7 +29,8 @@ import indexRouter from './routes/index.js'
 // var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
 
-// Crea la aplicacion express
+//Crear la aplicacion Express
+debug("🖌️ Creando Backend")
 var app = express();
 
 // Configurar el motor de vistas
@@ -36,8 +42,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // Configurar la carpeta de archivos estaticos
+debug("🖌️ Creando Servidor de Archivos Estáticos")
 app.use(express.static(path.join(__dirname,'..', 'public')));
 
+debug("🚌 Registrando Rutas")
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

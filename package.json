@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "DEBUG=desarrollo-web-ssr:* node ./server/bin/www",
-    "saludo": "echo 'Hola Mundo'"
+    "start": "node ./server/bin/www.js",
+    "dev": "DEBUG=desarrollo-web-ssr:* node ./server/bin/www.js",
+    "greet": "echo 'Hola Mundo'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
