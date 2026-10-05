@@ -20,7 +20,7 @@ import {dirname} from 'node:path'
 
 // Creacion del objeto Debug
 const debug = createDebug('desarrollo-web-ssr:server')
-// Creando Variables
+// Creando Variables de rutas
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 // Importa rutas de la aplicacion
