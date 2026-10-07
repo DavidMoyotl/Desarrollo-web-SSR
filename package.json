@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node ./server/bin/www.js",
+    "start": "NODE_ENV-production node ./server/bin/www.js",
     "dev": "DEBUG=desarrollo-web-ssr:* nodemon ./server/bin/www.js",
+    "dev:vite": "vite",
+    "dev:all": "concurrently \"npm run dev\" \"npm run dev.vite\"",
+    "build": "vite build",
+    "preview": "npm run build && npm start",
     "greet": "echo 'Hola Mundo'"
   },
   "dependencies": {

@@ -17,6 +17,8 @@ import createDebug from "debug"
 // IMPORTS para crear Dirname
 import {fileURLToPath} from 'node:url'
 import {dirname} from 'node:path'
+// Importando el template engine Handlebars
+import hbs from 'hbs'
 
 // Creacion del objeto Debug
 const debug = createDebug('desarrollo-web-ssr:server')
@@ -28,6 +30,8 @@ const __dirname = dirname(__filename)
 import indexRouter from './routes/index.js'
 // var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
+// Importando el registrador del helper
+import {registrerViteHelper } from './lib/vite.js'
 
 //Crear la aplicacion Express
 debug("🖌️ Creando Backend")
@@ -36,11 +40,19 @@ var app = express();
 // Configurar el motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// Registro Helper
+registerViteHelper(hbs)
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// Archivos estaticos para produccion
+if(process.env.NODE_ENV == 'production'){
+  app.use(express.static(path.join(__dirname,'..', 'dist')));
+}
+
 // Configurar la carpeta de archivos estaticos
 debug("🖌️ Creando Servidor de Archivos Estáticos")
 app.use(express.static(path.join(__dirname,'..', 'public')));

@@ -1,6 +1,12 @@
 import {defineConfig} from 'vite';
 //importando rutas 
 import {resolve} from 'node:path'
+// IMPORTS para crear Dirname
+import {fileURLToPath} from 'node:url'
+import {dirname} from 'node:path'
+// Creando Variables de rutas
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 export default defineConfig({
     root: 'src',
