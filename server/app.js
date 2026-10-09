@@ -31,7 +31,7 @@ import indexRouter from './routes/index.js'
 // var usersRouter = require('./routes/users');
 import usersRouter from './routes/users.js'
 // Importando el registrador del helper
-import {registrerViteHelper } from './lib/vite.js'
+import {registerViteHelper } from './lib/vite.js'
 
 //Crear la aplicacion Express
 debug("🖌️ Creando Backend")
