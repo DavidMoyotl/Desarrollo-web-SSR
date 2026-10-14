@@ -11,7 +11,7 @@ export default defineConfig([
     ]
   },
   // 2) configuracion del back-end
-  { files: ["server/**/*.{js,mjs}"], plugins: { js }, extends: ["js/recommended"], languageOptions: {ecmaVersion: "latest", sourceType: "module", globals: {...globals.node} } },
+  { files: ["server/**/*.{js,mjs}"], plugins: { js }, extends: ["js/recommended"], languageOptions: {ecmaVersion: "latest", sourceType: "module", globals: {...globals.node} }, rules:{"no-unused-vars": [ "error",{"argsIgnorePattern":"^_"}]} },
 
     // 3) Codigo del front-end
   { files: ["src/**/*.{js,mjs}"], plugins: { js }, extends: ["js/recommended"], languageOptions: {ecmaVersion: "latest", sourceType: "module", globals: {...globals.browser} } },
