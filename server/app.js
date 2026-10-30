@@ -1,41 +1,36 @@
-// Funcion para manejar errores
+// app.js // Funcion para manejar errores
 import createError from 'http-errors'
 // Importa el framework express
-// ❌ var express = require('express');
 import express from 'express'
-// Importa modulos para manejar rutas
-// ❌ var path = require('path');
-import path from 'node:path'
+// Importa modulos para manejar rutas y Dirname (Combinados en una sola línea)
+import path, { dirname } from 'node:path' 
 // Importa modulos para manejar cookies
-//  var cookieParser = require('cookie-parser');
 import cookieParser from 'cookie-parser'
 // Importa modulos para manejar logs
-// ❌ var logger = require('morgan');
 import logger from 'morgan'
 // Importanto biblioteca de debug
 import createDebug from "debug"
 // IMPORTS para crear Dirname
-import {fileURLToPath} from 'node:url'
-import {dirname} from 'node:path'
+import { fileURLToPath } from 'node:url'
 // Importando el template engine Handlebars
 import hbs from 'hbs'
+// Importa rutas de la aplicacion
+// eslint-disable-next-line import-x/no-rename-default, import-x/no-useless-path-segments
+import indexRouter from "./routes/index.js"
+// eslint-disable-next-line import-x/no-rename-default
+import usersRouter from './routes/users.js'
+// Importando el registrador del helper
+import { registerViteHelper } from './lib/vite.js'
 
 // Creacion del objeto Debug
 const debug = createDebug('desarrollo-web-ssr:server')
 // Creando Variables de rutas
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-// Importa rutas de la aplicacion
-// var indexRouter = require('./routes/index');
-import indexRouter from './routes/index.js'
-// var usersRouter = require('./routes/users');
-import usersRouter from './routes/users.js'
-// Importando el registrador del helper
-import {registerViteHelper } from './lib/vite.js'
 
 //Crear la aplicacion Express
 debug("🖌️ Creando Backend")
-var app = express();
+const app = express();
 
 // Configurar el motor de vistas
 app.set('views', path.join(__dirname, 'views'));
@@ -49,7 +44,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Archivos estaticos para produccion
-if(process.env.NODE_ENV == 'production'){
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname,'..', 'dist')));
 }
 
@@ -62,12 +57,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // Manejador de errores
-app.use(function(err, req, res, _next) {
+app.use((err, req, res, _next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -77,14 +72,4 @@ app.use(function(err, req, res, _next) {
   res.render('error');
 });
 
-// Ejemplo de codigo inalcanzable 
-// (()=>{
-//   let age = 10
-//   return
-//   if (age == 10) {
-//     console.log("Codigo")
-//   }
-// })()
-
-// module.exports = app;
 export default app;
