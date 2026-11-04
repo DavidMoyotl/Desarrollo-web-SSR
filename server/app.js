@@ -9,14 +9,14 @@ import cookieParser from 'cookie-parser'
 // Importa modulos para manejar logs
 import morgan from 'morgan'
 // Importanto biblioteca de debug
-import createDebug from "debug"
+// import createDebug from "debug"
 // IMPORTS para crear Dirname
 import { fileURLToPath } from 'node:url'
 // Importando el template engine Handlebars
 import hbs from 'hbs'
 
 // Importa rutas de la aplicacion
-// eslint-disable-next-line import-x/no-rename-default, import-x/no-useless-path-segments
+// eslint-disable-next-line import-x/no-useless-path-segments
 import indexRouter from "./routes/index.js"
 // eslint-disable-next-line import-x/no-rename-default
 import usersRouter from './routes/users.js'
@@ -26,13 +26,14 @@ import { registerViteHelper } from './lib/vite.js'
 import logger from "./lib/winston.js"
 
 // Creacion del objeto Debug
-const debug = createDebug('desarrollo-web-ssr:server')
+// const debug = createDebug('desarrollo-web-ssr:server')
 // Creando Variables de rutas
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 //Crear la aplicacion Express
-debug("🖌️ Creando Backend")
+// debug("🖌️ Creando Backend")
+logger.info('🖌️ Creando Backend')
 const app = express();
 
 // Configurar el motor de vistas
@@ -60,10 +61,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Configurar la carpeta de archivos estaticos
-debug("🖌️ Creando Servidor de Archivos Estáticos")
+// debug("🖌️ Creando Servidor de Archivos Estáticos")
+logger.info('🖌️ Creando Servidor de Archivos Estáticos')
 app.use(express.static(path.join(__dirname,'..', 'public')));
 
-debug("🚌 Registrando Rutas")
+// debug("🚌 Registrando Rutas")
+logger.info('🚌 Registrando Rutas')
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
