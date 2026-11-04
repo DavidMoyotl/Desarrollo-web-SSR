@@ -7,13 +7,14 @@ import path, { dirname } from 'node:path'
 // Importa modulos para manejar cookies
 import cookieParser from 'cookie-parser'
 // Importa modulos para manejar logs
-import logger from 'morgan'
+import morgan from 'morgan'
 // Importanto biblioteca de debug
 import createDebug from "debug"
 // IMPORTS para crear Dirname
 import { fileURLToPath } from 'node:url'
 // Importando el template engine Handlebars
 import hbs from 'hbs'
+
 // Importa rutas de la aplicacion
 // eslint-disable-next-line import-x/no-rename-default, import-x/no-useless-path-segments
 import indexRouter from "./routes/index.js"
@@ -21,6 +22,8 @@ import indexRouter from "./routes/index.js"
 import usersRouter from './routes/users.js'
 // Importando el registrador del helper
 import { registerViteHelper } from './lib/vite.js'
+// Importando la configuracion de winston logger
+import logger from "./lib/winston.js"
 
 // Creacion del objeto Debug
 const debug = createDebug('desarrollo-web-ssr:server')
@@ -38,7 +41,15 @@ app.set('view engine', 'hbs');
 // Registro Helper
 registerViteHelper(hbs)
 
-app.use(logger('dev'));
+//Configurar middlewares de la aplicacion
+app.use(
+  morgan('dev', { 
+    stream: { 
+      write: (msg)=>logger.info(msg.trim()) 
+    } 
+  }),
+  );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

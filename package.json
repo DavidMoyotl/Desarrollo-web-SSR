@@ -17,7 +17,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "clean:logs": "rm -rf ./logs/*.log"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
